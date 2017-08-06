@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if [ -z $1 ]; then
+    echo -e "Usage:\n  docker-hexo repo [html]."
+    exit 0
+fi
+
+filename=`echo $1|sed 's/\.git$//'`
+extend=`echo $1 | awk -F'.' '{print  "."$NF}'`
+
+if [ $extend = .git ]; then
+    exit 0
+else
+    cd /repos/$1 && npm install
+    hexo g
+    mv /repos/$1 /html/$1
+    exit 0
+fi
+
+exit 1

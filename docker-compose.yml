@@ -1,0 +1,7 @@
+version: '2'
+services:
+  docker-hexo:
+    image: docker-hexo
+    volumes:
+      - ./repos:/repos
+      - ./html:/html
