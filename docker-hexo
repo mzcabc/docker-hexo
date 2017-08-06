@@ -13,7 +13,7 @@ if [ $extend = .git ]; then
 else
     cd /repos/$1 && npm install
     hexo g
-    mv /repos/$1 /html/$1
+    mv /repos/$1/public /html/$1
     exit 0
 fi
 
