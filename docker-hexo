@@ -1,24 +1,10 @@
 #!/bin/sh
 
-if [ -z $1 ]; then
-    echo -e "Usage:\n  docker-hexo repo [html]."
-    exit 0
-fi
+# echo -e "Usage:\n docker run -v repoDir:/repo -v htmlDir:/html 99ft/hexo"
 
-filename=`echo $1|sed 's/\.git$//'`
-extend=`echo $1 | awk -F'.' '{print  "."$NF}'`
-
-if [ $extend = .git ]; then
-    git clone /repos/$1 /hexo_tmp
-    cd /hexo_tmp && npm install
-    hexo g
-    mv /hexo_tmp/public /html/$1
-    exit 0
-else
-    cd /repos/$1 && npm install
-    hexo g
-    mv /repos/$1/public /html/$1
-    exit 0
-fi
-
-exit 1
+cd /repo && git submodule init && git submodule update && npm install
+hexo g
+rm -rf /html/*
+mv /repo/public/* /html
+rm -rf /repo/public
+exit 0

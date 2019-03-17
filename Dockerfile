@@ -4,8 +4,9 @@ ENV TZ=Asia/Shanghai
 RUN apk add --update tzdata && \
     ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo "$TZ" > /etc/timezone
-VOLUME ["/repos", "/html"]
-RUN apk add --update nodejs nodejs-npm && \
+VOLUME ["/repo", "/html"]
+RUN apk add --no-cache git && \
+    apk add --update nodejs nodejs-npm && \
     rm -rf /var/cache/apk/* && \
     npm install -g --unsafe hexo-cli \
         hexo-generator-archive \

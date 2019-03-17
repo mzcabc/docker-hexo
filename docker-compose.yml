@@ -3,5 +3,5 @@ services:
   docker-hexo:
     image: 99ft/hexo
     volumes:
-      - ./repos:/repos
+      - ./repo:/repo
       - ./html:/html
