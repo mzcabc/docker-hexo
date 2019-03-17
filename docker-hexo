@@ -3,6 +3,7 @@
 # echo -e "Usage:\n docker run -v repoDir:/repo -v htmlDir:/html 99ft/hexo"
 
 cd /repo && git submodule init && git submodule update && npm install
+cp -r /.ssh ~/.ssh
 hexo g
 rm -rf /html/*
 mv /repo/public/* /html
